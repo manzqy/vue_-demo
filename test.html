@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" class="input">
+  <h2 id="result" style="color: green"></h2>
+  <script>
+    let content = document.querySelector('.input')
+    let h2 = document.querySelector('#result')
+    let obj = {}
+    function watch(obj, key, callback) {
+      var val = obj[key]
+      Object.defineProperty(obj, key, {
+        get() {
+          console.log(222)
+          return val
+        },
+        set(value) {
+          callback(value, this)
+        }
+      })
+    }
+    watch(obj, 'input', function(val) {
+      h2.innerHTML = val
+    })
+    content.addEventListener('keyup', function(e) {
+      obj.input = e.target.value
+    })
+  </script>
+</body>
+</html>
